@@ -1,0 +1,34 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+        <servlet-name>seckill-dispatcher</servlet-name>
+        <servlet-class>org.keithframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+			<param-name>loadOnStartup</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:AC-mvc.xml</param-value>
+		</init-param>
+    </servlet>
+  <servlet>
+  	<servlet-name>DispatcherServlet</servlet-name>
+  	<display-name>DispatcherServlet</display-name>
+  	<description></description>
+  	<servlet-class>org.keithframework.web.DispatcherServlet</servlet-class>
+  </servlet>
+
+    <servlet-mapping>
+        <servlet-name>seckill-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DispatcherServlet</servlet-name>
+    	<url-pattern>/DispatcherServlet</url-pattern>
+    </servlet-mapping>
+</web-app>

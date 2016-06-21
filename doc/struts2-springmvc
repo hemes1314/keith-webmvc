@@ -1,0 +1,1 @@
+1.struts2的设计基本上完全脱离了Servlet容器，而springmvc是依托着Servlet容器元素来设计的
