@@ -31,6 +31,9 @@ public class HttpServletBean extends HttpServlet {
 	protected final Log logger = LogFactory.getLog(getClass());
 	
 	@Override
+	/**
+	 * 入口
+	 */
 	public void init() throws ServletException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Initializing servlet '" + getServletName() + "'");
@@ -38,11 +41,15 @@ public class HttpServletBean extends HttpServlet {
 
 		// Set bean properties from init parameters.
 		try {
+			// ServletConfig获取web.xml中的参数设置到ServletConfigPropertyValues
 			PropertyValues pvs = new ServletConfigPropertyValues(getServletConfig(), this.requiredProperties);
+			
+			// BeanWrapper构造DispatcherServlet实例
 			BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
 			ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
 			bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader, getEnvironment()));
 			initBeanWrapper(bw);
+			
 			bw.setPropertyValues(pvs, true);
 		}
 		catch (BeansException ex) {
@@ -58,6 +65,15 @@ public class HttpServletBean extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * Subclasses may override this to perform custom initialization.
+	 * All bean properties of this servlet will have been set before this
+	 * method is invoked.
+	 * <p>This default implementation is empty.
+	 * @throws ServletException if subclass initialization fails
+	 */
+	protected void initServletBean() throws ServletException {
+	}
 	
 	/**
 	 * PropertyValues implementation created from ServletConfig init parameters.
